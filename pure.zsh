@@ -120,7 +120,8 @@ prompt_pure_preprompt_render() {
 	[[ -n ${prompt_pure_git_last_dirty_check_timestamp+x} ]] && git_color=red
 
 	# construct preprompt, beginning with path
-	local preprompt="%F{blue}%~%f"
+	if [ $PWD = $HOME ]; then dir_name=""; else dir_name="${PWD##*/}"; fi
+	local preprompt="%F{blue}$dir_name%f"
 	# git info
 	preprompt+="%F{$git_color}${vcs_info_msg_0_}${prompt_pure_git_dirty}%f"
 	# git pull/push arrows
